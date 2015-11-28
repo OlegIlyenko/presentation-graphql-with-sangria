@@ -28,7 +28,7 @@ backquote {
 }
 
 code {
-  font-family: "letter-gothic-std" !important;
+  font-family: "source-code-pro" !important;
 }
 
 .reveal h1 {
@@ -103,4 +103,12 @@ h2.smaller {
 
 .not-so-good {
   color: #8b2e17;
+}
+
+iframe.graphiql {
+  width: 40vw;
+  height: 40vh;
+  -webkit-box-shadow: 0px 0px 50px -2px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 50px -2px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 50px -2px rgba(0,0,0,0.3);
 }

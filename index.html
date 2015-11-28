@@ -40,6 +40,8 @@
 		<![endif]-->
 
     <link rel="stylesheet" href="assets/highlight/solarized_light.css">
+
+    <link href="//cdn.jsdelivr.net/graphiql/0.4.2/graphiql.css" rel="stylesheet" />
 	</head>
 
 	<body>
@@ -56,11 +58,61 @@
           </p>
 				</section>
 
+        <section>
+          <h2>Typical Rest API</h2>
+
+          <img src="assets/img/rest-api.svg">
+        </section>
+
+        <section>
+          <h2>GraphQL Equivalent</h2>
+
+          <img src="assets/img/graphql-api.svg" style="max-width: 70%">
+        </section>
+
+        <section>
+          <h2>GraphiQL</h2>
+
+          <pre><code class="graphiql javascript" data-trim contenteditable>
+{
+  hero {
+    id
+    name
+
+    friends {
+      name
+    }
+  }
+}
+
+// Response
+{
+  "data": {
+    "hero": {
+      "id": "2001",
+      "name": "R2-D2",
+      "friends": [
+        {
+          "name": "Luke Skywalker"
+        },
+        {
+          "name": "Han Solo"
+        },
+        {
+          "name": "Leia Organa"
+        }
+      ]
+    }
+  }
+}
+          </code></pre>
+        </section>
+
         <section data-background="#dc7676" class="first-slide">
           <h1>Thank you!</h1>
           <br>
           <ul class="fragment roll-in" data-fragment-index="2">
-            <li><a href="#" target="_blank">TODO: this presentation URL</a></li>
+            <li><a href="http://bit.ly/graphql-with-sangria" target="_blank">http://bit.ly/graphql-with-sangria</a></li>
             <li><strong>Twitter:</strong> <a href="https://twitter.com/easyangel" target="_blank">https://twitter.com/easyangel</a></li>
             <li><strong>GraphQL:</strong> <a href="http://graphql.org" target="_blank">http://graphql.org</a></li>
             <li><strong>Sangria:</strong> <a href="http://sangria-graphql.org" target="_blank">http://sangria-graphql.org</a></li>
@@ -79,7 +131,6 @@
 		<script src="assets/custom.js"></script>
 
 		<script>
-
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
@@ -100,8 +151,6 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
-
 		</script>
-
 	</body>
 </html>
