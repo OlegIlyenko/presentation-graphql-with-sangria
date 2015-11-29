@@ -24,7 +24,7 @@
     <script src="assets/offline/fonts.js"></script>
     <script src="https://use.typekit.net/jth3ywx.js"></script>
 
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <script>try{Typekit.load();}catch(e){}</script>
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -59,15 +59,120 @@
 				</section>
 
         <section>
+          <h2>TODO</h2>
+
+          <ul>
+            <li>
+              GraphQL Features
+
+              <ul>
+                <li>Aliases</li>
+                <li>Every field is a function</li>
+                <li>Type System</li>
+                <li>Fragments</li>
+                <li>Introspection</li>
+              </ul>
+            </li>
+            <li>
+              Sangria Features
+
+              <ul>
+                <li>Deferred</li>
+                <li>Projections</li>
+                <li>Middleware</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
           <h2>Typical Rest API</h2>
 
           <img src="assets/img/rest-api.svg">
         </section>
 
         <section>
+          <h2>Common Issues</h2>
+
+          <ul>
+            <li>
+              Over-fetching
+
+              <ul class="fragment fade-in" data-fragment-index="1">
+                <li>/products?<span class="qname">field</span>=<span class="qvalue">name</span>&<span class="qname">field</span>=<span class="qvalue">description</span>&<span class="qname">field</span>=<span class="qvalue">variants[*].price</span></li>
+              </ul>
+            </li>
+            <li class="fragment fade-in" data-fragment-index="2">
+              Under-fetching
+
+              <ul class="fragment fade-in" data-fragment-index="3">
+                <li>/products?<span class="qname">expand</span>=<span class="qvalue">productType</span>&<span class="qname">expand</span>=<span class="qvalue">variants[*].price.taxRate</span></li>
+              </ul>
+            </li>
+            <li class="fragment fade-in" data-fragment-index="4">
+              API changes and evolution
+
+              <ul class="fragment fade-in" data-fragment-index="5">
+                <li>Versioning</li>
+                <li>Deprecation</li>
+                <li>Maintenance</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>API Gateways</h2>
+
+          <img src="assets/img/api-gateway.svg">
+        </section>
+
+        <section>
           <h2>GraphQL Equivalent</h2>
 
           <img src="assets/img/graphql-api.svg" style="max-width: 70%">
+        </section>
+
+        <section>
+          <h2>Response Structure</h2>
+
+          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
+query MyProduct {
+  product(id: 123) {
+    name
+    description
+  }
+}
+          </code></pre>
+
+          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
+{
+  "data": {
+    "product": {
+      "name": "Delicious Cake",
+      "description": "Just taste it!"
+    }
+  }
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>GraphQL</h2>
+
+          <ul>
+            <li>Developed by Facebook</li>
+            <li class="fragment fade-in" data-fragment-index="1">Used internally since 2012</li>
+            <li class="fragment fade-in" data-fragment-index="2">Open source version published in July 2015</li>
+            <li class="fragment fade-in" data-fragment-index="3">Relay released in August 2015</li>
+            <li class="fragment fade-in" data-fragment-index="4">Specification: <a href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Backend Agnostic</h2>
+
+          <img src="assets/img/app-layers.svg">
         </section>
 
         <section>
@@ -118,7 +223,8 @@
             <li><strong>Sangria:</strong> <a href="http://sangria-graphql.org" target="_blank">http://sangria-graphql.org</a></li>
             <li><strong>GitHub:</strong> <a href="https://github.com/sangria-graphql" target="_blank">https://github.com/sangria-graphql</a></li>
             <li><strong>Sangria Playground:</strong> <a href="http://try.sangria-graphql.org" target="_blank">http://try.sangria-graphql.org</a></li>
-          </ul><br><br>
+          </ul>
+          <br><br>
           <h2 class="fragment roll-in" data-fragment-index="3">Questions?</h2>
         </section>
 			</div>
