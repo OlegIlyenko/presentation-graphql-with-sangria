@@ -63,17 +63,6 @@
 
           <ul>
             <li>
-              GraphQL Features
-
-              <ul>
-                <li>Aliases</li>
-                <li>Every field is a function</li>
-                <li>Type System</li>
-                <li>Fragments</li>
-                <li>Introspection</li>
-              </ul>
-            </li>
-            <li>
               Sangria Features
 
               <ul>
@@ -128,9 +117,22 @@
         </section>
 
         <section>
-          <h2>GraphQL Equivalent</h2>
+          <h2>GraphQL Approach</h2>
 
           <img src="assets/img/graphql-api.svg" style="max-width: 70%">
+        </section>
+
+        <section>
+          <h2>GraphQL</h2>
+
+          <ul>
+            <li>A data query language</li>
+            <li class="fragment fade-in" data-fragment-index="1">Developed by Facebook</li>
+            <li class="fragment fade-in" data-fragment-index="2">Used internally since 2012</li>
+            <li class="fragment fade-in" data-fragment-index="3">Open source version published in July 2015</li>
+            <li class="fragment fade-in" data-fragment-index="4">Relay released in August 2015</li>
+            <li class="fragment fade-in" data-fragment-index="5">Specification: <a href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a></li>
+          </ul>
         </section>
 
         <section>
@@ -141,6 +143,12 @@ query MyProduct {
   product(id: 123) {
     name
     description
+
+    picture {
+      width
+      height
+      url
+    }
   }
 }
           </code></pre>
@@ -151,6 +159,12 @@ query MyProduct {
     "product": {
       "name": "Delicious Cake",
       "description": "Just taste it!"
+
+      "picture": {
+        "width": 150,
+        "height": 150,
+        "url": "http://..."
+      }
     }
   }
 }
@@ -158,15 +172,144 @@ query MyProduct {
         </section>
 
         <section>
-          <h2>GraphQL</h2>
+          <h2>Every field Is a Function</h2>
 
-          <ul>
-            <li>Developed by Facebook</li>
-            <li class="fragment fade-in" data-fragment-index="1">Used internally since 2012</li>
-            <li class="fragment fade-in" data-fragment-index="2">Open source version published in July 2015</li>
-            <li class="fragment fade-in" data-fragment-index="3">Relay released in August 2015</li>
-            <li class="fragment fade-in" data-fragment-index="4">Specification: <a href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a></li>
-          </ul>
+          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
+query MyProduct {
+  products {
+    picture(size: 300) {
+      width, height, url
+    }
+  }
+}
+          </code></pre>
+
+          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
+{
+  "data": {
+    "products": [
+      {
+        "picture": {
+          "width": 300,
+          "height": 300,
+          "url": "http://..."
+        }
+      },
+      ...
+    ]
+  }
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Aliases</h2>
+
+          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
+query MyProduct {
+  products {
+    thumb: picture(size: 100) {
+      width
+    }
+    fullSize: picture(size: 500) {
+      width
+    }
+  }
+}
+          </code></pre>
+
+          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
+{
+  "data": {
+    "products": [
+      {
+        "thumb": {
+          "width": 100
+        },
+        "fullSize": {
+          "width": 500
+        }
+      },
+      ...
+    ]
+  }
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Type System</h2>
+
+          <pre style="float: left; width: 60%"><code data-trim contenteditable class="javascript">
+type Picture {
+  width: Int!
+  height: Int!
+  url: String
+}
+
+interface Identifiable {
+  id: String!
+}
+
+type Product implements Identifiable {
+  id: String!
+  name: String!
+  description: String
+  picture(size: Int): Picture
+}
+          </code></pre>
+
+          <pre style="float: left; width: 40%"><code data-trim contenteditable class="javascript">
+type Query {
+  product(id: Int!): Product
+  products: [Product]
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Mutations & Subscriptions</h2>
+
+          <pre><code data-trim contenteditable class="javascript">
+mutation ChangeStaff {
+  changeName(productId: 123, newName: "Cheesecake") {
+    id, version
+  }
+
+  setDescription(productId: 123, description: "Delicious!") {
+    id, version
+  }
+}
+
+subscription ProductEvents {
+  nameChanged(productId: 123) { name }
+  productDeleted { id }
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Demo Time</h2>
+          <!-- GrpahiQL, Fragments, Introspection, docs -->
+
+          <pre><code class="graphiql javascript" data-trim contenteditable>
+{
+  hero {
+    id
+    name
+  }
+}
+
+// Response
+{
+  "data": {
+    "hero": {
+      "id": "2001",
+      "name": "R2-D2"
+    }
+  }
+}
+          </code></pre>
         </section>
 
         <section>
@@ -176,41 +319,29 @@ query MyProduct {
         </section>
 
         <section>
-          <h2>GraphiQL</h2>
+          <img src="assets/img/sangria-logo.svg" style="max-width: 55%"/>
 
-          <pre><code class="graphiql javascript" data-trim contenteditable>
-{
-  hero {
-    id
-    name
+          <ul>
+            <li>A Scala GraphQL implementation</li>
+            <li class="fragment fade-in" data-fragment-index="1">Open source with Apache 2.0 licence</li>
+            <li class="fragment fade-in" data-fragment-index="2">Conforms to GraphQL spec</li>
+            <li class="fragment fade-in" data-fragment-index="3">Simple case-class based schema definition</li>
+            <li class="fragment fade-in" data-fragment-index="4">Query parsing, validation and execution</li>
+            <li class="fragment fade-in" data-fragment-index="5">
+              Out-or-the-box support for different JSON ASTs:
 
-    friends {
-      name
-    }
-  }
-}
+              <ul>
+                <li>play-json, spray-json, json4s, etc.</li>
+              </ul>
+            </li>
+            <li class="fragment fade-in" data-fragment-index="6">
+              Additional features:
 
-// Response
-{
-  "data": {
-    "hero": {
-      "id": "2001",
-      "name": "R2-D2",
-      "friends": [
-        {
-          "name": "Luke Skywalker"
-        },
-        {
-          "name": "Han Solo"
-        },
-        {
-          "name": "Leia Organa"
-        }
-      ]
-    }
-  }
-}
-          </code></pre>
+              <ul>
+                <li>deferred values, projections, middleware, query reducers, etc.</li>
+              </ul>
+            </li>
+          </ul>
         </section>
 
         <section data-background="#dc7676" class="first-slide">
