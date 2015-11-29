@@ -344,6 +344,61 @@ subscription ProductEvents {
           </ul>
         </section>
 
+        <section>
+          <h2>Schema Definition</h2>
+
+          <pre><code data-trim contenteditable class="scala" style="max-height: 510px; font-size: 90%; line-height: 1.05em;">
+case class Product(
+  name: String,
+  description: Option[String])
+
+val ProductType = ObjectType(
+  "Product",
+  "Commodity available for purchase",
+  fields[Unit, Product](
+    Field("name", StringType,
+      resolve = _.value.name),
+    Field("description", OptionType(StringType),
+      resolve = _.value.description)
+  )
+)
+
+val QueryType = ObjectType("Query",
+  fields[ProductRepo, Unit](
+    Field("product", OptionType(ProductType),
+      arguments = Argument("id", IntType) :: Nil,
+      resolve = c =>
+        c.ctx.getProductById(c.args.arg[Int]("id")))
+  )
+)
+
+val AppSchema = Schema(QueryType)
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Query Execution</h2>
+
+          <pre><code data-trim contenteditable class="scala">
+import sangria.execution.Executor
+import sangria.macros._
+
+import sangria.integration.playJson._
+
+val query = graphql"""
+  query MyProduct {
+    product(id: 123) {
+      name
+      description
+    }
+  }
+  """
+
+val result: Future[JsValue] =
+  Executor.execute(AppSchema, query, userContext = new ProductRepo)
+          </code></pre>
+        </section>
+
         <section data-background="#dc7676" class="first-slide">
           <h1>Thank you!</h1>
           <br>
