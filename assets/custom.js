@@ -1,7 +1,7 @@
 $(function() {
   //var graphiqlUrl = "http://localhost:9000/graphiql"
   var graphiqlUrl = "http://try.sangria-graphql.org/graphiql"
-  var graphiqlZoom = 150
+  var graphiqlZoom = 140
 
   var showHideCredits = function (currentSlide) {
     var section = $(currentSlide)
