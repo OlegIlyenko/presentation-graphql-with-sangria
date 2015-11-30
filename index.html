@@ -59,22 +59,6 @@
 				</section>
 
         <section>
-          <h2>TODO</h2>
-
-          <ul>
-            <li>
-              Sangria Features
-
-              <ul>
-                <li>Deferred</li>
-                <li>Projections</li>
-                <li>Middleware</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-
-        <section>
           <h2>Typical Rest API</h2>
 
           <img src="assets/img/rest-api.svg">
@@ -347,7 +331,9 @@ subscription ProductEvents {
         <section>
           <h2>Schema Definition</h2>
 
-          <pre><code data-trim contenteditable class="scala" style="max-height: 510px; font-size: 90%; line-height: 1.05em;">
+          <pre><code data-trim contenteditable class="scala">
+import sangria.schema._
+
 case class Product(
   name: String,
   description: Option[String])
@@ -362,7 +348,13 @@ val ProductType = ObjectType(
       resolve = _.value.description)
   )
 )
+          </code></pre>
+        </section>
 
+        <section>
+          <h2>Schema Definition</h2>
+
+          <pre><code data-trim contenteditable class="scala">
 val QueryType = ObjectType("Query",
   fields[ProductRepo, Unit](
     Field("product", OptionType(ProductType),
