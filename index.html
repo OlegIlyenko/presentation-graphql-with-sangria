@@ -318,13 +318,6 @@ subscription ProductEvents {
                 <li>play-json, spray-json, json4s, etc.</li>
               </ul>
             </li>
-            <li class="fragment fade-in" data-fragment-index="6">
-              Additional features:
-
-              <ul>
-                <li>deferred values, projections, middleware, query reducers, etc.</li>
-              </ul>
-            </li>
           </ul>
         </section>
 
@@ -389,6 +382,44 @@ val query = graphql"""
 val result: Future[JsValue] =
   Executor.execute(AppSchema, query, userContext = new ProductRepo)
           </code></pre>
+        </section>
+
+        <section>
+          <h2>Additional Features</h2>
+
+          <ul>
+            <li>
+              Deferred values
+
+              <ul>
+                <li>Helps to solve N+1 query problem</li>
+              </ul>
+            </li>
+            <li class="fragment fade-in" data-fragment-index="1">
+              Projections
+
+              <ul>
+                <li>Helps to build efficient DB projections</li>
+              </ul>
+            </li>
+            <li class="fragment fade-in" data-fragment-index="3">
+              Middleware
+
+              <ul>
+                <li>Query execution instrumentation</li>
+                <li>Security primitives</li>
+                <li>Performance measurements</li>
+              </ul>
+            </li>
+            <li class="fragment fade-in" data-fragment-index="4">
+              Query reducers
+
+              <ul>
+                <li>Query analysis before execution</li>
+                <li>Query complexity measurement</li>
+              </ul>
+            </li>
+          </ul>
         </section>
 
         <section data-background="#dc7676" class="first-slide">
