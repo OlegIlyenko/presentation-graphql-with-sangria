@@ -389,6 +389,54 @@ val result: Future[JsValue] =
         </section>
 
         <section>
+          <h2>Play Example</h2>
+
+          <pre><code data-trim contenteditable class="scala">
+class Application extends Controller {
+
+  def graphql = Action.async(parse.json) { request =>
+    val query = (request.body \ "query").as[String]
+
+    val operation = (request.body \ "operation").asOpt[String]
+
+    val variables = (request.body \ "variables").toOption.flatMap {
+      case obj: JsObject => Some(obj)
+      case _ => None
+    }
+
+    executeQuery(query, variables, operation)
+  }
+
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Play Example</h2>
+
+          <pre><code data-trim contenteditable class="scala">
+def executeQuery(
+        query: String,
+        variables: Option[JsObject],
+        operation: Option[String]) = {
+  QueryParser.parse(query) match {
+
+    case Success(parsedQuery) =>
+      Executor.execute(AppSchema, parsedQuery,
+        userContext = new ProductRepo,
+        operationName = operation,
+        variables = variables getOrElse Json.obj()) map (Ok(_))
+
+    case Failure(error: SyntaxError) =>
+      // can't parse GraphQL query, return error response
+  }
+}
+          </code></pre>
+
+          <span class="fragment fade-in" data-fragment-index="1">Sangria Playground: <a href="http://try.sangria-graphql.org" target="_blank">http://try.sangria-graphql.org</a></span>
+        </section>
+
+        <section>
           <h2>Additional Features</h2>
 
           <ul>
