@@ -137,7 +137,7 @@ query MyProduct {
 }
           </code></pre>
 
-          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
+          <pre style="float: left; width: 50%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
 {
   "data": {
     "product": {
@@ -168,7 +168,7 @@ query MyProduct {
 }
           </code></pre>
 
-          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
+          <pre style="float: left; width: 50%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
 {
   "data": {
     "products": [
@@ -202,7 +202,7 @@ query MyProduct {
 }
           </code></pre>
 
-          <pre style="float: left; width: 50%"><code data-trim contenteditable class="javascript">
+          <pre style="float: left; width: 50%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
 {
   "data": {
     "products": [
@@ -230,23 +230,27 @@ type Picture {
   height: Int!
   url: String
 }
+          </code></pre>
 
+          <pre style="float: left; width: 40%" class="fragment fade-in" data-fragment-index="3"><code data-trim contenteditable class="javascript">
+type Query {
+  product(id: Int!): Product
+  products: [Product]
+}
+          </code></pre>
+
+          <pre style="float: left; width: 60%" class="fragment fade-in" data-fragment-index="1"><code data-trim contenteditable class="javascript">
 interface Identifiable {
   id: String!
 }
+          </code></pre>
 
+          <pre style="float: left; width: 60%" class="fragment fade-in" data-fragment-index="2"><code data-trim contenteditable class="javascript">
 type Product implements Identifiable {
   id: String!
   name: String!
   description: String
   picture(size: Int): Picture
-}
-          </code></pre>
-
-          <pre style="float: left; width: 40%"><code data-trim contenteditable class="javascript">
-type Query {
-  product(id: Int!): Product
-  products: [Product]
 }
           </code></pre>
         </section>
