@@ -1,6 +1,6 @@
 $(function() {
-  //var graphiqlUrl = "http://localhost:9000/graphiql"
-  var graphiqlUrl = "http://try.sangria-graphql.org/graphiql"
+  var graphiqlUrl = "http://localhost:9000/graphiql"
+  //var graphiqlUrl = "http://try.sangria-graphql.org/graphiql"
   var graphiqlZoom = 140
 
   var showHideCredits = function (currentSlide) {
